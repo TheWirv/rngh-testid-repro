@@ -1,0 +1,47 @@
+diff --git a/node_modules/react-native-gesture-handler/lib/commonjs/mocks.js b/node_modules/react-native-gesture-handler/lib/commonjs/mocks.js
+index 5b4fdc0..45c7835 100644
+--- a/node_modules/react-native-gesture-handler/lib/commonjs/mocks.js
++++ b/node_modules/react-native-gesture-handler/lib/commonjs/mocks.js
+@@ -11,25 +11,25 @@ var _State = require("./State");
+ 
+ var _Directions = require("./Directions");
+ 
+-const NOOP = () => {// do nothing
++var NOOP = () => {// do nothing
+ };
+ 
+-const PanGestureHandler = _reactNative.View;
+-const attachGestureHandler = NOOP;
+-const createGestureHandler = NOOP;
+-const dropGestureHandler = NOOP;
+-const updateGestureHandler = NOOP;
+-const NativeViewGestureHandler = _reactNative.View;
+-const TapGestureHandler = _reactNative.View;
+-const ForceTouchGestureHandler = _reactNative.View;
+-const LongPressGestureHandler = _reactNative.View;
+-const PinchGestureHandler = _reactNative.View;
+-const RotationGestureHandler = _reactNative.View;
+-const FlingGestureHandler = _reactNative.View;
+-const RawButton = _reactNative.TouchableNativeFeedback;
+-const BaseButton = _reactNative.TouchableNativeFeedback;
+-const RectButton = _reactNative.TouchableNativeFeedback;
+-const BorderlessButton = _reactNative.TouchableNativeFeedback;
++var PanGestureHandler = _reactNative.View;
++var attachGestureHandler = NOOP;
++var createGestureHandler = NOOP;
++var dropGestureHandler = NOOP;
++var updateGestureHandler = NOOP;
++var NativeViewGestureHandler = _reactNative.View;
++var TapGestureHandler = _reactNative.View;
++var ForceTouchGestureHandler = _reactNative.View;
++var LongPressGestureHandler = _reactNative.View;
++var PinchGestureHandler = _reactNative.View;
++var RotationGestureHandler = _reactNative.View;
++var FlingGestureHandler = _reactNative.View;
++var RawButton = _reactNative.TouchableNativeFeedback;
++var BaseButton = _reactNative.TouchableNativeFeedback;
++var RectButton = _reactNative.TouchableNativeFeedback;
++var BorderlessButton = _reactNative.TouchableNativeFeedback;
+ var _default = {
+   TouchableHighlight: _reactNative.TouchableHighlight,
+   TouchableNativeFeedback: _reactNative.TouchableNativeFeedback,

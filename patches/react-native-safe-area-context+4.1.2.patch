@@ -1,0 +1,60 @@
+diff --git a/node_modules/react-native-safe-area-context/jest/mock.js b/node_modules/react-native-safe-area-context/jest/mock.js
+index 0d2ffc7..00c8951 100644
+--- a/node_modules/react-native-safe-area-context/jest/mock.js
++++ b/node_modules/react-native-safe-area-context/jest/mock.js
+@@ -1,6 +1,7 @@
+ /* global jest */
+ 
+ import React from 'react';
++import { View } from 'react-native';
+ 
+ const MOCK_INITIAL_METRICS = {
+   frame: {
+@@ -18,22 +19,35 @@ const MOCK_INITIAL_METRICS = {
+ };
+ 
+ const RNSafeAreaContext = jest.requireActual('react-native-safe-area-context');
++export const SafeAreaView = View;
++
++// Provide a simpler implementation with default values.
++export const SafeAreaProvider = ({ children, initialMetrics }) => (
++  <RNSafeAreaContext.SafeAreaFrameContext.Provider
++    value={initialMetrics?.frame ?? MOCK_INITIAL_METRICS.frame}
++  >
++    <RNSafeAreaContext.SafeAreaInsetsContext.Provider
++      value={initialMetrics?.insets ?? MOCK_INITIAL_METRICS.insets}
++    >
++      {children}
++    </RNSafeAreaContext.SafeAreaInsetsContext.Provider>
++  </RNSafeAreaContext.SafeAreaFrameContext.Provider>
++);
+ 
+ export default {
+   ...RNSafeAreaContext,
+   initialWindowMetrics: MOCK_INITIAL_METRICS,
+   // Provide a simpler implementation with default values.
+-  SafeAreaProvider: ({ children, initialMetrics }) => {
+-    return (
+-      <RNSafeAreaContext.SafeAreaFrameContext.Provider
+-        value={initialMetrics?.frame ?? MOCK_INITIAL_METRICS.frame}
++  SafeAreaProvider: ({ children, initialMetrics }) => (
++    <RNSafeAreaContext.SafeAreaFrameContext.Provider
++      value={initialMetrics?.frame ?? MOCK_INITIAL_METRICS.frame}
++    >
++      <RNSafeAreaContext.SafeAreaInsetsContext.Provider
++        value={initialMetrics?.insets ?? MOCK_INITIAL_METRICS.insets}
+       >
+-        <RNSafeAreaContext.SafeAreaInsetsContext.Provider
+-          value={initialMetrics?.insets ?? MOCK_INITIAL_METRICS.insets}
+-        >
+-          {children}
+-        </RNSafeAreaContext.SafeAreaInsetsContext.Provider>
+-      </RNSafeAreaContext.SafeAreaFrameContext.Provider>
+-    );
+-  },
++        {children}
++      </RNSafeAreaContext.SafeAreaInsetsContext.Provider>
++    </RNSafeAreaContext.SafeAreaFrameContext.Provider>
++  ),
++  SafeAreaView
+ };

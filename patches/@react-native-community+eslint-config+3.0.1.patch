@@ -1,0 +1,30 @@
+diff --git a/node_modules/@react-native-community/eslint-config/index.js b/node_modules/@react-native-community/eslint-config/index.js
+index be53966..b97f8f1 100644
+--- a/node_modules/@react-native-community/eslint-config/index.js
++++ b/node_modules/@react-native-community/eslint-config/index.js
+@@ -18,7 +18,7 @@ module.exports = {
+ 
+   extends: [
+     'plugin:prettier/recommended', // https://github.com/prettier/eslint-plugin-prettier#recommended-configuration
+-    'prettier/react',
++    'prettier',
+   ],
+ 
+   plugins: [
+@@ -39,15 +39,7 @@ module.exports = {
+   overrides: [
+     {
+       files: ['*.js'],
+-      parser: 'babel-eslint',
+-      plugins: ['flowtype'],
+-      rules: {
+-        // Flow Plugin
+-        // The following rules are made available via `eslint-plugin-flowtype`
+-
+-        'flowtype/define-flow-type': 1,
+-        'flowtype/use-flow-type': 1,
+-      },
++      parser: 'babel-eslint'
+     },
+     {
+       files: ['*.ts', '*.tsx'],

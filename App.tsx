@@ -1,6 +1,5 @@
-import React from 'react';
+import {useState} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -8,7 +7,8 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
+import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {
   Colors,
   DebugInstructions,
@@ -16,9 +16,13 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import type {FunctionComponent} from 'react';
+import CoolButton from './components/CoolButton';
 
-const Section: React.FC<{title: string}> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
+const Section: FunctionComponent<{title: string}> = ({children, title}) => {
+  const colorScheme = useColorScheme() ?? 'dark';
+  const isDarkMode = colorScheme === 'dark';
+  const [amount, setAmount] = useState(0);
 
   return (
     <View style={styles.sectionContainer}>
@@ -40,11 +44,21 @@ const Section: React.FC<{title: string}> = ({children, title}) => {
         ]}>
         {children}
       </Text>
+      <CoolButton
+        amount={amount}
+        onPress={() => setAmount(amount + 1)}
+        theme={colorScheme}
+        containerStyle={{marginTop: 16, borderRadius: 8}}
+        style={{borderRadius: 8}}>
+        <View style={{padding: 16}}>
+          <Text style={{fontSize: 16}}>Increase!</Text>
+        </View>
+      </CoolButton>
     </View>
   );
 };
 
-const App: React.FC = () => {
+const App: FunctionComponent = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -52,31 +66,37 @@ const App: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{backgroundColor: isDarkMode ? Colors.black : Colors.white}}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaProvider>
+        <SafeAreaView style={backgroundStyle}>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={backgroundStyle}>
+            <Header />
+            <View
+              style={{
+                backgroundColor: isDarkMode ? Colors.black : Colors.white,
+              }}>
+              <Section title="Step One">
+                Edit <Text style={styles.highlight}>App.tsx</Text> to change
+                this screen and then come back to see your edits.
+              </Section>
+              <Section title="See Your Changes">
+                <ReloadInstructions />
+              </Section>
+              <Section title="Debug">
+                <DebugInstructions />
+              </Section>
+              <Section title="Learn More">
+                Read the docs to discover what to do next:
+              </Section>
+              <LearnMoreLinks />
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
 
